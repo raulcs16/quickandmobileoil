@@ -1,0 +1,20 @@
+{
+    "name": "@repo/firebase",
+    "version": "0.0.0",
+    "type": "module",
+    "private": true,
+    "exports": {
+        "./admin": "./admin.ts"
+    },
+    "dependencies": {
+        "firebase-admin": "^13.6.0",
+        "firebase-functions": "^7.0.0"
+    },
+    "devDependencies": {
+        "@repo/typescript-config": "*",
+        "@repo/eslint-config": "*",
+        "@types/node": "^22.15.3",
+        "eslint": "^9.39.1",
+        "typescript": "5.9.2"
+    }
+}
