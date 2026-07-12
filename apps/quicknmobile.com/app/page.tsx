@@ -6,17 +6,19 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-bg-dark text-primary antialiased font-sans pb-12">
       {/* Header */}
-      <header className="sticky top-0 z-50 border-b-2 border-border backdrop-blur-md bg-bg px-6 py-4 flex items-center justify-between max-w-6xl mx-auto shadow-primary">
-        <div className="flex items-center gap-3 font-bold text-xl tracking-tight text-primary">
-          <Logo width={36}></Logo>
-          <CompanyTitle></CompanyTitle>
+      <header className="sticky top-0 z-50 border-b-2 border-border backdrop-blur-md bg-bg px-6 py-4  shadow-primary">
+        <div className="flex items-center justify-between max-w-6xl mx-auto">
+          <div className="flex items-center gap-3 font-bold text-xl tracking-tight text-primary">
+            <Logo width={36}></Logo>
+            <CompanyTitle></CompanyTitle>
+          </div>
+          <a
+            href="#form-section"
+            className="bg-blue-600 hover:bg-blue-700 text-primary font-bold px-2 py-3 rounded-xl shadow-lg shadow-white/5 transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-nowrap"
+          >
+            Schedule Service
+          </a>
         </div>
-        <a
-          href="#form-section"
-          className="bg-blue-600 hover:bg-blue-700 text-primary font-bold px-2 py-3 rounded-xl shadow-lg shadow-white/5 transition-all transform hover:-translate-y-0.5 active:translate-y-0 text-nowrap"
-        >
-          Schedule Service
-        </a>
       </header>
 
       {/* Hero Section */}
