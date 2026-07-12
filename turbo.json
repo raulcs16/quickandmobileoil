@@ -13,7 +13,8 @@
             "outputs": [
                 ".next/**",
                 "!.next/cache/**",
-                "!.next/dev/**"
+                "!.next/dev/**",
+                "functions/index.js"
             ]
         },
         "lint": {
