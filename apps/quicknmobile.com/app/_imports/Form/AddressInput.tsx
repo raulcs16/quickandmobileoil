@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 
 interface AddressInputProps {
+  step: number;
+  currentStep: number;
   onCompleted: (state: boolean) => void;
 }
 
@@ -20,7 +22,9 @@ export default function AddressInput(props: AddressInputProps) {
   }, [street, city, state, zip]);
 
   return (
-    <div className="w-full max-w-md mx-auto space-y-4 p-5 rounded-2xl bg-bg-light border border-border shadow-primary text-left">
+    <div
+      className={`${props.step === props.currentStep ? "visible" : "hidden"} w-full max-w-md mx-auto space-y-4 p-5 rounded-2xl bg-bg-light border border-border shadow-primary text-left`}
+    >
       <h2 className="text-sm font-semibold tracking-wide text-primary mb-2">
         Address Where Car Will Be Serviced At
       </h2>

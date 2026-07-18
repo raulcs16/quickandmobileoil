@@ -1,18 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface CarInputProps {
-  onComplete: () => void;
+  step: number;
+  currentStep: number;
+  onComplete: (filled: boolean) => void;
 }
 
 export default function CarInput(props: CarInputProps) {
   const [searchReady, setSearchReady] = useState(false);
   const [confirmReady, setConfirmReady] = useState(false);
+  const [confirmed, setConfirmed] = useState(false);
   const [vin, setVin] = useState("");
   const [year, setYear] = useState("");
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
+  const [cylinders, setCylinders] = useState(0);
+  useEffect(() => {
+    let filled = true;
+    if (vin.length != 17) filled = false;
+    if (year === "") filled = false;
+    if (make === "") filled = false;
+    if (model === "") filled = false;
+    props.onComplete(filled);
+  }, [confirmed]);
   function resetAll() {
     setSearchReady(false);
     setConfirmReady(false);
@@ -20,6 +32,7 @@ export default function CarInput(props: CarInputProps) {
     setYear("");
     setMake("");
     setModel("");
+    setCylinders(0);
   }
   function updateVin(text: string) {
     setVin(text);
@@ -43,18 +56,21 @@ export default function CarInput(props: CarInputProps) {
     const make = data.Results[7].Value;
     const model = data.Results[9].Value;
     const year = data.Results[10].Value;
-    const cyclinders = data.Results[25].Value;
-    if (!make || !model || !year || !cyclinders) {
+    const cylinders = data.Results[25].Value;
+    if (!make || !model || !year || !cylinders) {
       return;
     }
     setYear(year);
     setModel(model);
     setMake(make);
+    setCylinders(cylinders);
     setSearchReady(false);
     setConfirmReady(true);
   }
   return (
-    <div className="w-full max-w-md mx-auto space-y-5 p-5 rounded-2xl bg-bg-light border border-border shadow-primary">
+    <div
+      className={`${props.step === props.currentStep ? "visible" : "hidden"} w-full max-w-md mx-auto space-y-4 p-5 rounded-2xl bg-bg-light border border-border shadow-primary text-left`}
+    >
       {/* VIN Field */}
       <div className="space-y-1.5">
         <label className="text-xs font-medium tracking-wide text-secondary uppercase block">
@@ -90,7 +106,7 @@ export default function CarInput(props: CarInputProps) {
         <input
           placeholder="yyyy"
           type="text"
-          disabled={true}
+          readOnly={true}
           name="car.year"
           className="bg-bg-dark w-[6ch] py-1 px-2"
           value={year}
@@ -98,7 +114,7 @@ export default function CarInput(props: CarInputProps) {
         <input
           placeholder="make"
           type="text"
-          disabled={true}
+          readOnly={true}
           name="car.make"
           className="bg-bg-dark w-[10ch] py-1 px-2"
           value={make}
@@ -106,11 +122,12 @@ export default function CarInput(props: CarInputProps) {
         <input
           placeholder="model"
           type="text"
-          disabled={true}
+          readOnly={true}
           name="car.model"
           className="bg-bg-dark w-[10ch] py-1 px-2"
           value={model}
         />
+        <input type="hidden" name="car.cylinders" value={cylinders} />
       </div>
       <div className="flex gap-3 justify-end">
         <button
@@ -125,7 +142,7 @@ export default function CarInput(props: CarInputProps) {
         </button>
         <button
           type="button"
-          onClick={() => props.onComplete()}
+          onClick={() => setConfirmed(true)}
           disabled={!confirmReady}
           className={`p-2 border-2 rounded-lg w-[10ch]
             ${confirmReady ? "bg-green-600" : "bg-green-500/50"}

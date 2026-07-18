@@ -1,0 +1,29 @@
+POST http://localhost:8000/oil-form
+Content-Type: application/json
+
+{
+  "address": {
+    "street": "123 Main Street",
+    "city": "Santa Cruz",
+    "state": "CA",
+    "zip": "95060",
+    "apt": "Suite B"
+  },
+  "car": {
+    "vin": "1HGCR2F8XHA000000",
+    "make": "Honda",
+    "model": "Accord",
+    "year": "2017",
+    "cylinders": "4"
+  },
+  "contact": {
+    "name": "John Doe",
+    "phone": "(831) 555-0199"
+  },
+  "availablity": {
+    "slots": [
+      "TUE-3am-6pm",
+      "WED-8am-12pm"
+    ]
+  }
+}

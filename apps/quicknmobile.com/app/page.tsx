@@ -1,6 +1,7 @@
 import Logo from "./_imports/Logo";
 import CompanyTitle from "./_imports/CompanyTitle";
 import ScheduleForm from "./_imports/Form/ScheduleForm";
+import MultiStepForm from "./_imports/MultiStepForm/MultiStepInput";
 
 export default function Home() {
   return (

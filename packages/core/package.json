@@ -1,0 +1,16 @@
+{
+    "name": "@repo/core",
+    "version": "0.0.0",
+    "type": "module",
+    "private": true,
+    "exports": {
+        "./oilservice": "./oilservice.ts"
+    },
+    "devDependencies": {
+        "@repo/typescript-config": "*",
+        "@repo/eslint-config": "*",
+        "@types/node": "^22.15.3",
+        "eslint": "^9.39.1",
+        "typescript": "5.9.2"
+    }
+}

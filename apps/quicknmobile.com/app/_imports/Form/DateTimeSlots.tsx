@@ -75,11 +75,18 @@ export default function DateTimeSlots(props: DateTimeSlotsProps) {
               const isSelected = selectedSlots.includes(slotIdentifier);
 
               return (
-                <TimeSlot
-                  selected={isSelected}
-                  timeRange={timeRange}
-                  onClicked={() => handleSlotToggle(slotIdentifier)}
-                />
+                <div className="relative">
+                  {/* 💥 This hidden input binds your state array to the parent form context */}
+                  {isSelected && (
+                    <input type="hidden" name="slots" value={slotIdentifier} />
+                  )}
+
+                  <TimeSlot
+                    selected={isSelected}
+                    timeRange={timeRange}
+                    onClicked={() => handleSlotToggle(slotIdentifier)}
+                  />
+                </div>
               );
             }}
           />

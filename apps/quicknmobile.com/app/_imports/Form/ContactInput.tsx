@@ -1,8 +1,22 @@
-interface ContactInputProps {}
+import { useEffect, useState } from "react";
+
+interface ContactInputProps {
+  step: number;
+  currentStep: number;
+  onComplete: (state: boolean) => void;
+}
 
 export default function ContactInput(props: ContactInputProps) {
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+
+  useEffect(() => {
+    props.onComplete(name.length > 3 && phone.length > 5);
+  }, [name, phone]);
   return (
-    <div className="w-full max-w-md mx-auto space-y-4 p-5 rounded-2xl bg-bg-light border border-border shadow-primary text-left">
+    <div
+      className={`${props.step === props.currentStep ? "visible" : "hidden"} w-full max-w-md mx-auto space-y-4 p-5 rounded-2xl bg-bg-light border border-border shadow-primary text-left`}
+    >
       <h2 className="text-sm font-semibold tracking-wide text-primary mb-2">
         Contact Information:
       </h2>
@@ -18,6 +32,8 @@ export default function ContactInput(props: ContactInputProps) {
           autoComplete="name"
           placeholder="John Doe"
           className="w-full px-4 py-3 rounded-xl border border-border bg-bg-dark text-primary placeholder:text-secondary/50 focus:ring-2 focus:ring-highlight/30 focus:border-highlight outline-none transition duration-150 text-sm font-sans"
+          value={name}
+          onChange={(e) => setName(e.currentTarget.value)}
         />
       </div>
 
@@ -32,6 +48,8 @@ export default function ContactInput(props: ContactInputProps) {
           autoComplete="tel"
           placeholder="(555) 000-0000"
           className="w-full px-4 py-3 rounded-xl border border-border bg-bg-dark text-primary placeholder:text-secondary/50 focus:ring-2 focus:ring-highlight/30 focus:border-highlight outline-none transition duration-150 text-sm font-sans"
+          value={phone}
+          onChange={(e) => setPhone(e.currentTarget.value)}
         />
       </div>
     </div>
