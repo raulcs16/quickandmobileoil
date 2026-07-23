@@ -4,7 +4,11 @@
     "type": "module",
     "private": true,
     "exports": {
-        "./oilservice": "./oilservice.ts"
+        "./oilservice/types": "./oilservice/types.ts",
+        "./oilservice/repo": "./oilservice/repo.ts",
+        "./oilservice/useCase": "./oilservice/useCases.ts",
+        "./notification/types": "./notification/types.ts",
+        "./notification/telegram": "./notification/telegram.ts"
     },
     "devDependencies": {
         "@repo/typescript-config": "*",

@@ -1,7 +1,7 @@
-// Change 'import * as admin' to this:
 import admin from "firebase-admin";
 import { getApps } from "firebase-admin/app";
 import { onRequest } from "firebase-functions/v2/https";
+import { getFirestore } from "firebase-admin/firestore";
 
 // Use getApps() instead of admin.apps for cleaner, modern code
 if (!getApps().length) {
@@ -16,4 +16,4 @@ if (!getApps().length) {
   }
 }
 
-export { admin, onRequest };
+export { admin, onRequest, getFirestore };

@@ -3,8 +3,12 @@
     "version": "0.0.0",
     "type": "module",
     "private": true,
+    "scripts": {
+        "test": "jest --config jest.config.ts"
+    },
     "exports": {
-        "./admin": "./admin.ts"
+        "./admin": "./admin.ts",
+        "./oil_service_repo": "./oil_service_repo.ts"
     },
     "dependencies": {
         "firebase-admin": "^13.6.0",
@@ -13,6 +17,8 @@
     "devDependencies": {
         "@repo/typescript-config": "*",
         "@repo/eslint-config": "*",
+        "@repo/jest-config": "*",
+        "@types/jest": "^29.5.14",
         "@types/node": "^22.15.3",
         "eslint": "^9.39.1",
         "typescript": "5.9.2"

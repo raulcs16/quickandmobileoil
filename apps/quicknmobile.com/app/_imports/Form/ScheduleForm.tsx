@@ -4,7 +4,7 @@ import { useState } from "react";
 import CarInput from "./CarInput";
 import AddressInput from "./AddressInput";
 import ContactInput from "./ContactInput";
-import { ServiceBookingPayload } from "@repo/core/oilservice";
+import { OilServiceRequest } from "@repo/core/oilservice/types";
 import DateSelectionStep from "./DateSelectionStep";
 import SubmittedCard from "./SubmittedCard";
 
@@ -32,7 +32,7 @@ export default function ScheduleForm(props: ScheduleFormProps) {
     if (selectedTimeSlots.length === 0) {
       console.error("No Slots Detected!");
     }
-    const payload: ServiceBookingPayload = {
+    const payload: OilServiceRequest = {
       address: {
         street: formData.get("address.street")?.toString() || "",
         city: formData.get("address.city")?.toString() || "",
@@ -40,20 +40,18 @@ export default function ScheduleForm(props: ScheduleFormProps) {
         zip: formData.get("address.zip")?.toString() || "",
         apt: formData.get("address.apt")?.toString() || "",
       },
-      car: {
+      carInfo: {
         vin: formData.get("car.vin")?.toString() || "",
         make: formData.get("car.make")?.toString() || "",
         model: formData.get("car.model")?.toString() || "",
-        year: formData.get("car.year")?.toString() || "",
-        cylinders: formData.get("car.cylinders")?.toString() || "",
+        year: Number(formData.get("car.year")) || 0,
+        cylinders: Number(formData.get("car.cylinders")) || 0,
       },
-      contact: {
+      customer: {
         name: formData.get("contact.name")?.toString() || "",
         phone: formData.get("contact.phone")?.toString() || "",
       },
-      availability: {
-        slots: selectedTimeSlots,
-      },
+      availability: selectedTimeSlots,
     };
     const res = await fetch("http://localhost:8000/oil-form", {
       method: "POST",
